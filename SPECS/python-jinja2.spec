@@ -2,7 +2,7 @@
 
 Name:           python-jinja2
 Version:        2.11.3
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        General purpose template engine
 License:        BSD
 URL:            https://palletsprojects.com/p/jinja/
@@ -14,6 +14,10 @@ Patch2:         0002-native_concat-pass-only-strings-to-literal_eval.patch
 # Security fix for CVE-2024-22195
 # Resolved upstream: https://github.com/pallets/jinja/commit/7dd3680e6eea0d77fde024763657aa4d884ddb23
 Patch3:         0003-CVE-2024-22195.patch
+
+# Security fix for CVE-2024-34064
+# Resolved upstream: https://github.com/pallets/jinja/commit/0668239dc6b44ef38e7a6c9f91f312fd4ca581cb
+Patch4:         0004-CVE-2024-34064.patch
 
 %if 0%{?fedora} || 0%{?rhel} > 7
 # Enable python3 build by default
@@ -186,6 +190,10 @@ PYTHONPATH=$(pwd)/src %{__python3} -m pytest tests
 
 
 %changelog
+* Tue May 07 2024 Lumír Balhar <lbalhar@redhat.com> - 2.11.3-6
+- Security fix for CVE-2024-34064
+Resolves: RHEL-35653
+
 * Tue Jan 30 2024 Charalampos Stratakis <cstratak@redhat.com> - 2.11.3-5
 - Security fix for CVE-2024-22195
 Resolves: RHEL-21349
