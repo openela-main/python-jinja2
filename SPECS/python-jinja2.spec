@@ -2,7 +2,7 @@
 
 Name:           python-jinja2
 Version:        2.11.3
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        General purpose template engine
 License:        BSD
 URL:            https://palletsprojects.com/p/jinja/
@@ -24,6 +24,12 @@ Patch4:         0004-CVE-2024-34064.patch
 # Tracking bug: https://bugzilla.redhat.com/show_bug.cgi?id=2333856
 # Patch backported from upstream without changelog and typing.
 Patch5:         0005-CVE-2024-56326.patch
+
+# Security fix for CVE-2025-27516
+# Resolved upstream: https://github.com/pallets/jinja/commit/90457bbf33b8662926ae65cdde4c4c32e756e403
+# Tracking bug: https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2025-27516
+# Patch backported from upstream without changelog.
+Patch6:         0006-CVE-2025-27516.patch
 
 %if 0%{?fedora} || 0%{?rhel} > 7
 # Enable python3 build by default
@@ -196,6 +202,10 @@ PYTHONPATH=$(pwd)/src %{__python3} -m pytest tests
 
 
 %changelog
+* Wed Mar 26 2025 Lumír Balhar <lbalhar@redhat.com> - 2.11.3-8
+- Security fix for CVE-2025-27516
+Resolves: RHEL-85064
+
 * Wed Jan 22 2025 Lumír Balhar <lbalhar@redhat.com> - 2.11.3-7
 - Security fix for CVE-2024-56326
 Resolves: RHEL-74690
